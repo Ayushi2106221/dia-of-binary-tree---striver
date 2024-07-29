@@ -1,0 +1,22 @@
+class Solution {
+public:
+
+    pair<int,int> fastdia(TreeNode *root){
+       if(root==NULL){
+        return {0,0};
+       }
+       pair<int,int>left=fastdia(root->left);
+       pair<int,int>right=fastdia(root->right);
+
+       int op1=left.first;
+       int op2=right.first;
+       int op3=left.second+right.second;
+       pair<int,int>ans;
+       ans.second=max(left.second,right.second)+1;
+       ans.first=max(op1,max(op2,op3));
+       return ans;
+    }
+    int diameterOfBinaryTree(TreeNode* root) {
+        return fastdia(root).first;
+    }
+};
